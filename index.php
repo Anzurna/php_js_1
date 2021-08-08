@@ -1,13 +1,14 @@
-<html>
+<?php include("includes/config.php");?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <?php require "includes/head-tag.php" ?>
 </head>
 <body>
-<p>TEST</p>
-<?php
-echo 1;
-var_dump(1);
-die;
-echo 0;
-?>
+    <?php require "includes/navigation.php" ?>
+
+    <?php require "includes/footer.php" ?>
 </body>
+
+
 </html>

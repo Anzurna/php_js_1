@@ -7,6 +7,16 @@
     background-color: #c4c2c2;
   }
 
-  .nav-menu-element {
-      font-size: 1.3em;
-  }
+.nav-menu-element {
+    font-size: 1.3em;
+}
+
+#crud-user {
+    border: 2px solid black;
+    border-radius:10px;
+
+    margin: 1em;
+    padding: 1em;
+
+}
+  

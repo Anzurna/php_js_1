@@ -1,4 +1,6 @@
 <?php
+	error_reporting(-1);
+	ini_set('display_errors', 'On');
 	switch ($_SERVER["SCRIPT_NAME"]) {
 		case "/p/administration.php":
 			$CURRENT_PAGE = "administration"; 

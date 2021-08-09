@@ -90,4 +90,4 @@
   </div>
 </div>
 
-<script src="/src/js/crud_users.js"></script>  
+<script type="module" src="/src/js/crud_users.js"></script>  

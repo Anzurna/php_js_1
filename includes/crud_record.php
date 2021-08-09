@@ -1,51 +1,30 @@
-<div id="crud-user" id="crud-user">
+<div id="crud-user" id="crud-record">
   <div class="container-fluid">
-    <form method="POST"  class="col-md-4">
-      <div class="form-group">
-        <label for="inputFirstName">First name</label>
-        <input type="text" class="form-control" id="inputFirstName" placeholder="Enter your first name">
+    <div  class="col-md-4">
+    <h2>Create or Update Record</h2>
+    <div class="form-group">
+        <label for="inputTitle">Title</label>
+        <input type="text" class="form-control" id="inputTitle" placeholder="Enter record's title">
       </div>
       <div class="form-group">
-        <label for="inputLastName">Last name</label>
-        <input type="text" class="form-control" id="inputLastName" placeholder="Enter your last name">
+        <label for="inputFirstName">Content</label>
+        <textarea class="form-control" id="exampleContentArea" rows="10" charswidth="23" style="resize:vertical"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Add user</button>
-    </form>
+      <button type="submit" id="create_user" class="btn btn-primary">Create</button>
+      <button type="submit" id="update_user" class="btn btn-primary">Update</button>
+  </div>
 
-    <form method="POST"  class="col-md-4">
+    <div  class="col-md-4">
+      <h2>Find or Delete Record</h2>
       <div class="form-group">
-        <label for="inputFirstName">First name</label>
-        <input type="text" class="form-control" id="inputFirstName" placeholder="Enter your first name">
+        <label for="inputRecordFindDelete">Record title</label>
+        <input type="text" class="form-control" id="inputRecordFindDelete" placeholder="Enter records's title">
       </div>
-      <div class="form-group">
-        <label for="inputLastName">Last name</label>
-        <input type="text" class="form-control" id="inputLastName" placeholder="Enter your last name">
-      </div>
-      <button type="submit" class="btn btn-primary">Add user</button>
-    </form>
-
-    <form method="POST"  class="col-md-4">
-      <div class="form-group">
-        <label for="inputFirstName">First name</label>
-        <input type="text" class="form-control" id="inputFirstName" placeholder="Enter your first name">
-      </div>
-      <div class="form-group">
-        <label for="inputLastName">Last name</label>
-        <input type="text" class="form-control" id="inputLastName" placeholder="Enter your last name">
-      </div>
-      <button type="submit" class="btn btn-primary">Add user</button>
-    </form>
-
-    <form method="POST"  class="col-md-4">
-      <div class="form-group">
-        <label for="inputFirstName">First name</label>
-        <input type="text" class="form-control" id="inputFirstName" placeholder="Enter your first name">
-      </div>
-      <div class="form-group">
-        <label for="inputLastName">Last name</label>
-        <input type="text" class="form-control" id="inputLastName" placeholder="Enter your last name">
-      </div>
-      <button type="submit" class="btn btn-primary">Add user</button>
-    </form>
+      <button type="submit" id="findRecord" class="btn btn-primary">Find</button>
+      <button type="button" id="findUpdateRecord" class="btn btn-primary">Find and Update</button>
+      <button type="submit" id="deleteRecord" class="btn btn-danger">Delete</button>
+    </div> 
   </div>
 </div>
+
+<script src="/src/js/crud_records.js"></script>  

@@ -1,5 +1,9 @@
 <?php
     require $_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php";
+
+    use Src\Controllers\UserController;
+
+    $requestMethod = $_SERVER["REQUEST_METHOD"];
     //include('../includes/dbopen.php');
     $data = json_decode(file_get_contents('php://input'));
     // $sql = "select book_name from book_mast where book_name LIKE '$book_name%'";
@@ -7,8 +11,8 @@
 
 
     $request = array($data);
-    use Src\Controllers\UserController;
-	$user = new UserController("12", "POST", "12");
+
+	$user = new UserController("12", $requestMethod, "12");
 
     //debug_to_console("123");
     $arr = array (

@@ -2,6 +2,10 @@
 	
 	error_reporting(-1);
 	ini_set('display_errors', 'On');
+
+	header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+	
+
 	switch ($_SERVER["SCRIPT_NAME"]) {
 		case "/p/administration.php":
 			$CURRENT_PAGE = "administration"; 

@@ -1,7 +1,7 @@
 <?php
-namespace php\Controllers;
+namespace Src\Controllers;
 
-use php\TableGateways\UserGateway;
+use Src\TableGateways\UserGateway;
 
 class UserController {
 

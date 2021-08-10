@@ -1,5 +1,5 @@
 <?php
-namespace php\TableGateways;
+namespace Src\TableGateways;
 
 class PersonGateway {
 

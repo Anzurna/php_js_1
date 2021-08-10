@@ -1,6 +1,6 @@
 <?php
 
-namespace php\Controllers\RequestController;
+namespace Src\Controllers\RequestController;
 
 class RequestController 
 {

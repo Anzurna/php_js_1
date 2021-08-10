@@ -1,4 +1,5 @@
 <?php
+	
 	error_reporting(-1);
 	ini_set('display_errors', 'On');
 	switch ($_SERVER["SCRIPT_NAME"]) {
@@ -18,4 +19,7 @@
 			$CURRENT_PAGE = "Index";
 			$PAGE_TITLE = "SmolCRM";
 	}
+
+
+
 ?>

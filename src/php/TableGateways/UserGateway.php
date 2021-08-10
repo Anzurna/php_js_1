@@ -1,7 +1,7 @@
 <?php
 namespace Src\TableGateways;
 
-class PersonGateway {
+class UserGateway {
 
     private $db = null;
 

@@ -6,7 +6,7 @@ use Src\TableGateways\UserGateway;
 class UserController {
 
     private $db;
-    private $requestMethod;
+    public $requestMethod;
     private $userId;
 
     private $userGateway;

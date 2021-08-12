@@ -15,9 +15,14 @@ class UserController {
     {
         $this->db = $db;
         $this->requestMethod = $requestMethod;
-        $this->userEmail = $requestData->email;
-
+        
         $this->userGateway = new UserGateway($db);
+
+        if ($this->requestMethod == "GET") {
+            $this->userEmail = $_GET["email"];
+        } else {
+            $this->userEmail = $requestData["email"];
+        }
     }
 
     public function processRequest()
@@ -25,7 +30,17 @@ class UserController {
         switch ($this->requestMethod) {
             case 'GET':
                 if ($this->userEmail) {
-                    $response = $this->getUser($this->userEmail);
+                    //$response = $this->getUser($this->userEmail);
+
+                    $arr = array (
+                                     'login'=> $_GET['email'],
+                                     'first_name'=>"Test Name",
+                                     'last_name'=> "Test Last Name",
+                                     'email'=> "test@email.com"  );
+                    $response['status_code_header'] = 'HTTP/1.1 200 OK';
+                    $response['body'] = json_encode($result);
+                    return $response;
+
                 } else {
                     $response = $this->getAllUsers();
                 };

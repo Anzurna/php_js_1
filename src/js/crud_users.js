@@ -1,7 +1,8 @@
 import {makeRequest, get} from "/src/js/requests.js";
 
 $(function() {
-
+    const usersApiPath= "/api/api.php?ent=users";
+    const emailUrlParameterKey = "&email=";
     $("#create_user").click(function() {
         let requestData = {
             actionType: "crud",
@@ -11,7 +12,7 @@ $(function() {
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
         }
-        makeRequest('/api/api.php', requestData, "POST")
+        makeRequest(`${usersApiPath}`, requestData, "POST")
         .then((response) => {
             console.log(response.status);
             if (!response.ok) {
@@ -31,7 +32,7 @@ $(function() {
             email: $("#inputEmailFindDelete").val()
         }
 
-        makeRequest('/api/api.php', requestData, "DELETE")
+        makeRequest(`${usersApiPath}`, requestData, "DELETE")
         .then((response) => {
             console.log(response.status);
             if (!response.ok) {
@@ -50,7 +51,7 @@ $(function() {
             entityName: "User",
             email: $("#inputEmailFindDelete").val()
         }
-        get('/api/api.php')
+        get(`${usersApiPath}${emailUrlParameterKey}${requestData.email}`)
         .then((response) => {
             console.log(response.status);
             if (!response.ok) {
@@ -59,7 +60,7 @@ $(function() {
             return response.json()
         })
         .then((responseData) => {
-            //display table with user information
+            //TODO display table with user information
         });
     });
 
@@ -67,7 +68,7 @@ $(function() {
         let requestData = {
             email: $("#inputEmailFindDelete").val()
         }
-        get('/api/api.php' + "?email=" + requestData.email)
+        get(`${usersApiPath}${emailUrlParameterKey}${requestData.email}`)
         .then((response) => {
             console.log(response.status);
             if (!response.ok) {
@@ -92,7 +93,7 @@ $(function() {
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
         }
-        makeRequest('/api/api.php', requestData, "PUT")
+        makeRequest(`${usersApiPath}`, requestData, "PUT")
         .then((response) => {
             console.log(response.status);
             if (!response.ok) {

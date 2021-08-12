@@ -1,17 +1,17 @@
-import {postData} from "/src/js/post_data.js";
+import {makeRequest, get} from "/src/js/requests.js";
 
 $(function() {
 
     $("#create_user").click(function() {
         let requestData = {
-            actionType: "crudUsers",
-            crudAction : "create",
+            actionType: "crud",
+            entityName: "User",
             login: $("#inputLogin").val(),
             firstName: $("#firstName").val(),
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
         }
-        postData('/src/php/response.php', requestData)
+        makeRequest('/api/api.php', requestData, "POST")
         .then((responseData) => {
   
         });
@@ -19,11 +19,12 @@ $(function() {
 
     $("#delete_user").click(function() {
         let requestData = {
-            actionType: "crudUser",
+            actionType: "crud",
+            entityName: "User",
             crudAction : "delete",
             login: $("#inputLoginFindDelete").val()
         }
-        postData('/src/php/response.php', requestData)
+        makeRequest('/api/api.php', requestData, "DELETE")
         .then((responseData) => {
 
         });
@@ -31,11 +32,11 @@ $(function() {
 
     $("#find_user").click(function() {
         let requestData = {
-            actionType: "crudUser",
-            crudAction : "find",
+            actionType: "crud",
+            entityName: "User",
             login: $("#inputLoginFindDelete").val()
         }
-        postData('/src/php/response.php', requestData)
+        get('/api/api.php')
         .then((responseData) => {
             //display table with user information
         });
@@ -43,11 +44,11 @@ $(function() {
 
     $("#find_update_user").click(function() {
         let requestData = {
-            actionType: "crudUser",
-            crudAction : "find",
+            actionType: "crud",
+            entityName: "User",
             login: $("#inputLoginFindDelete").val()
         }
-        postData('/src/php/response.php', requestData)
+        get('/api/api.php' + "?email=" + requestData.login)
         .then((data) => {
             $("#inputLogin").val(data.login);
             $("#inputFirstName").val(data.first_name);
@@ -58,14 +59,14 @@ $(function() {
 
     $("#update_user").click(function() {
         let requestData = {
-            actionType: "crudUser",
-            crudAction : "update",
+            actionType: "crud",
+            entityName: "User",
             login: $("#inputLogin").val(),
             firstName: $("#firstName").val(),
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
         }
-        postData('/src/php/response.php', requestData)
+        makeRequest('/api/api.php', requestData, "PUT")
         .then((responseData) => {
   
         });

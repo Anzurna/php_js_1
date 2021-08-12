@@ -2,6 +2,8 @@
 
 namespace Src\Controllers;
 
+use Src\Controllers\UserController;
+
 class RequestController 
 {
 
@@ -15,26 +17,10 @@ class RequestController
 
     public function processRequest()
     {
-        switch ($this->requestMethod) {
-            case 'GET':
-                if ($this->userId) {
-                    $response = $this->getUser($this->userId);
-                } else {
-                    $response = $this->getAllUsers();
-                };
-                break;
-            case 'POST':
-                $response = $this->createUserFromRequest();
-                break;
-            case 'PUT':
-                $response = $this->updateUserFromRequest($this->userId);
-                break;
-            case 'DELETE':
-                $response = $this->deleteUser($this->userId);
-                break;
-            default:
-                $response = $this->notFoundResponse();
-                break;
+        switch ($this->requestData["actionType"]) {
+            case 'crud':
+                $userController = new UserController($db, $reques);
+                
         }
         header($response['status_code_header']);
         if ($response['body']) {

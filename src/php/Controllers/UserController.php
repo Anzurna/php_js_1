@@ -6,16 +6,16 @@ use Src\TableGateways\UserGateway;
 class UserController {
 
     private $db;
-    public $requestMethod;
-    private $userId;
+    private $requestMethod;
+    private $requestData;
 
     private $userGateway;
 
-    public function __construct($db, $requestMethod, $userId)
+    public function __construct($db, $requestMethod, $requestData)
     {
         $this->db = $db;
         $this->requestMethod = $requestMethod;
-        $this->userId = $userId;
+        $this->userEmail = $requestData->email;
 
         $this->userGateway = new UserGateway($db);
     }
@@ -24,8 +24,8 @@ class UserController {
     {
         switch ($this->requestMethod) {
             case 'GET':
-                if ($this->userId) {
-                    $response = $this->getUser($this->userId);
+                if ($this->userEmail) {
+                    $response = $this->getUser($this->userEmail);
                 } else {
                     $response = $this->getAllUsers();
                 };
@@ -34,10 +34,10 @@ class UserController {
                 $response = $this->createUserFromRequest();
                 break;
             case 'PUT':
-                $response = $this->updateUserFromRequest($this->userId);
+                $response = $this->updateUserFromRequest($this->userEmail);
                 break;
             case 'DELETE':
-                $response = $this->deleteUser($this->userId);
+                $response = $this->deleteUser($this->userEmail);
                 break;
             default:
                 $response = $this->notFoundResponse();
@@ -57,9 +57,9 @@ class UserController {
         return $response;
     }
 
-    private function getUser($id)
+    private function getUser($email)
     {
-        $result = $this->userGateway->find($id);
+        $result = $this->userGateway->find($email);
         if (! $result) {
             return $this->notFoundResponse();
         }
@@ -68,52 +68,56 @@ class UserController {
         return $response;
     }
 
-    private function createUserFromRequest()
+    private function createUserFromRequest($requestData)
     {
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (! $this->validateuser($input)) {
+        if (! $this->validateuser($requestData)) {
             return $this->unprocessableEntityResponse();
         }
-        $this->userGateway->insert($input);
+        $this->userGateway->insert($requestData);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
         return $response;
     }
 
-    private function updateUserFromRequest($id)
+    private function updateUserFromRequest($requestData, $email)
     {
-        $result = $this->userGateway->find($id);
+        $result = $this->userGateway->find($email);
         if (! $result) {
             return $this->notFoundResponse();
         }
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (! $this->validateuser($input)) {
+        if (! $this->validateuser($requestData)) {
             return $this->unprocessableEntityResponse();
         }
-        $this->userGateway->update($id, $input);
+        $this->userGateway->update($email, $requestData);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
         return $response;
     }
 
-    private function deleteUser($id)
+    private function deleteUser($email)
     {
-        $result = $this->userGateway->find($id);
+        $result = $this->userGateway->find($email);
         if (! $result) {
             return $this->notFoundResponse();
         }
-        $this->userGateway->delete($id);
+        $this->userGateway->delete($email);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
         return $response;
     }
 
-    private function validateUser($input)
+    private function validateUser($requestData)
     {
-        if (! isset($input['firstname'])) {
+        if (! isset($requestData["login"])) {
             return false;
         }
-        if (! isset($input['lastname'])) {
+        if (! isset($requestData["firstName"])) {
+            return false;
+        }
+        if (! isset($requestData["lastName"])) {
+            return false;
+        }
+        if (! isset($requestData["email"])) {
             return false;
         }
         return true;

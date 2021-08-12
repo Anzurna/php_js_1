@@ -13,6 +13,22 @@ export async function makeRequest(url = '', data = {}, requestMethod = "POST") {
       referrerPolicy: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
-    return await response.json(); // parses JSON response into native JavaScript objects
+    return response; // parses JSON response into native JavaScript objects
+}
+
+export async function get(url = '') {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "GET", 
+    mode: 'cors', 
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
+    headers: {
+      'Content-Type': 'application/json'    
+    },
+    redirect: 'follow', 
+    referrerPolicy: 'no-referrer', 
+  });
+  return response; 
 }
 

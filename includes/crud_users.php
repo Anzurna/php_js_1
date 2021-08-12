@@ -80,8 +80,8 @@
     <div  class="col-md-4">
       <h2>Find or Delete User</h2>
       <div class="form-group">
-        <label for="inputLoginFindDelete">User login</label>
-        <input type="text" class="form-control" id="inputLoginFindDelete" placeholder="Enter user's login">
+        <label for="inputEmailFindDelete">User login</label>
+        <input type="text" class="form-control" id="inputEmailFindDelete" placeholder="Enter user's email">
       </div>
       <button type="submit" id="find_user" class="btn btn-primary">Find</button>
       <button type="button" id="find_update_user" class="btn btn-primary">Find and Update</button>

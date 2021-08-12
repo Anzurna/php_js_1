@@ -1,4 +1,4 @@
-import {makeRequest} from "/src/js/post_data.js";
+import {makeRequest, get} from "/src/js/requests.js";
 
 $(function() {
 
@@ -11,7 +11,14 @@ $(function() {
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
         }
-        makeRequest('/src/php/response.php', requestData, "POST")
+        makeRequest('/api/api.php', requestData, "POST")
+        .then((response) => {
+            console.log(response.status);
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((responseData) => {
   
         });
@@ -21,10 +28,17 @@ $(function() {
         let requestData = {
             actionType: "crud",
             entityName: "User",
-            crudAction : "delete",
-            login: $("#inputLoginFindDelete").val()
+            email: $("#inputEmailFindDelete").val()
         }
-        makeRequest('/src/php/response.php', requestData, "DELETE")
+
+        makeRequest('/api/api.php', requestData, "DELETE")
+        .then((response) => {
+            console.log(response.status);
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((responseData) => {
 
         });
@@ -34,9 +48,16 @@ $(function() {
         let requestData = {
             actionType: "crud",
             entityName: "User",
-            login: $("#inputLoginFindDelete").val()
+            email: $("#inputEmailFindDelete").val()
         }
-        makeRequest('/src/php/response.php', requestData, "GET")
+        get('/api/api.php')
+        .then((response) => {
+            console.log(response.status);
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((responseData) => {
             //display table with user information
         });
@@ -44,16 +65,21 @@ $(function() {
 
     $("#find_update_user").click(function() {
         let requestData = {
-            actionType: "crud",
-            entityName: "User",
-            login: $("#inputLoginFindDelete").val()
+            email: $("#inputEmailFindDelete").val()
         }
-        makeRequest('/src/php/response.php', requestData, "GET")
-        .then((data) => {
-            $("#inputLogin").val(data.login);
-            $("#inputFirstName").val(data.first_name);
-            $("#inputLastName").val(data.last_name);
-            $("#inputEmail").val(data.email);     
+        get('/api/api.php' + "?email=" + requestData.email)
+        .then((response) => {
+            console.log(response.status);
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
+        .then((responseData) => {
+            $("#inputLogin").val(responseData.login);
+            $("#inputFirstName").val(responseData.first_name);
+            $("#inputLastName").val(responseData.last_name);
+            $("#inputEmail").val(responseData.email);     
         });
     });
 
@@ -66,7 +92,14 @@ $(function() {
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
         }
-        makeRequest('/src/php/response.php', requestData, "PUT")
+        makeRequest('/api/api.php', requestData, "PUT")
+        .then((response) => {
+            console.log(response.status);
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((responseData) => {
   
         });

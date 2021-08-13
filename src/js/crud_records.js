@@ -1,6 +1,19 @@
 import {makeRequest, get} from "/src/js/requests.js";
 
 $(function() {
+
+    function fillRecordTable(responseData) {
+        $("#recordTable").empty();
+            for (const element of responseData) {
+                $("#recordTable").append(`
+                <tr>
+                    <th scope="row">${element.id}</th>
+                    <td>${element.title}</td>
+                    <td>${element.content}</td>
+                 </tr>`)
+            }
+    }
+
     const recordsApiPath= "/api/api.php?ent=records";
     const idUrlParameterKey = "&title=";
     $("#createRecord").click(function() {
@@ -55,8 +68,8 @@ $(function() {
             return response.json()
         })
         .then((responseData) => {
+            fillRecordTable(responseData);
             
-            //display table with record information
         });
     });
 
@@ -75,6 +88,7 @@ $(function() {
             return response.json()
         })
         .then((data) => {
+            fillRecordTable(responseData);
             $("#recordInputTitle").val(data[0].title);
             $("#recordInputContent").val(data[0].content);   
         });

@@ -27,14 +27,6 @@ class RequestController
     {
         switch ($this->entityType) {
             case 'users':          
-
-                // $arr = array (
-                //     'login'=>"test",
-                //     'first_name'=>"Test Name",
-                //     'last_name'=> "Test Last Name",
-                //     'email'=> "test@email.com"  );
-        
-                // echo json_encode($arr);
                 $userController = new UserController($this->dbConnection, $this->requestMethod, $this->requestData);
                 $userController->processRequest();
                 break;
@@ -43,10 +35,7 @@ class RequestController
                 $recordController->processRequest();  
                 break;           
         }
-        // header($response['status_code_header']);
-        // if ($response['body']) {
-        //     echo $response['body'];
-        // }
+
     }
 }
 ?>

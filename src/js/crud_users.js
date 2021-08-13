@@ -1,6 +1,20 @@
 import {makeRequest, get} from "/src/js/requests.js";
 
 $(function() {
+    function fillUserTable(responseData) {
+        $("#userTable").empty();
+            for (const element of responseData) {
+                $("#userTable").append(`
+                <tr>
+                    <th scope="row">${element.id}</th>
+                    <td>${element.login}</td>
+                    <td>${element.firstname}</td>
+                    <td>${element.lastname}</td>
+                    <td>${element.email}</td>
+                 </tr>`)
+            }
+    }
+
     const usersApiPath= "/api/api.php?ent=users";
     const emailUrlParameterKey = "&email=";
     $("#create_user").click(function() {
@@ -55,20 +69,7 @@ $(function() {
             return response.json()
         })
         .then((responseData) => {
-            
-            $("#userTable").empty();
-            for (const element of responseData) {
-                $("#userTable").append(`
-                <tr>
-                    <th scope="row">${element.id}</th>
-                    <td>${element.login}</td>
-                    <td>${element.firstname}</td>
-                    <td>${element.lastname}</td>
-                    <td>${element.email}</td>
-                 </tr>`)
-            }
-            
-            //TODO display table with user information
+            fillUserTable(responseData);   
         });
     });
 
@@ -86,6 +87,7 @@ $(function() {
             return response.json()
         })
         .then((responseData) => {
+            fillUserTable(responseData);   
             $("#inputLogin").val(responseData[0].login);
             $("#inputFirstName").val(responseData[0].firstname);
             $("#inputLastName").val(responseData[0].lastname);

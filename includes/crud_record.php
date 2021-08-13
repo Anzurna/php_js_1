@@ -24,6 +24,21 @@
       <button type="button" id="findUpdateRecord" class="btn btn-primary">Find and Update</button>
       <button type="submit" id="deleteRecord" class="btn btn-danger">Delete</button>
     </div> 
+    <div class="col-md-4">
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">title</th>
+          <th scope="col">content</th>
+        </tr>
+      </thead>
+      <tbody id="recordTable">
+
+    
+      </tbody>
+      </table>
+    </div>
   </div>
 </div>
 

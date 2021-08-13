@@ -8,13 +8,16 @@ class UserController {
     private $db;
     private $requestMethod;
     private $requestData;
+    private $userEmail;
 
     private $userGateway;
+
 
     public function __construct($db, $requestMethod, $requestData)
     {
         $this->db = $db;
         $this->requestMethod = $requestMethod;
+        $this->requestData =  $requestData;
         
         $this->userGateway = new UserGateway($db);
 
@@ -27,29 +30,37 @@ class UserController {
 
     public function processRequest()
     {
+            
+        // $arr = array (
+        //     'login'=>$this->userEmail,
+        //     'first_name'=>"Test Name",
+        //     'last_name'=> "Test Last Name",
+        //     'email'=> "test@email.com"  );
+
+        // echo json_encode($arr);
         switch ($this->requestMethod) {
             case 'GET':
                 if ($this->userEmail) {
-                    //$response = $this->getUser($this->userEmail);
+                    $response = $this->getUser($this->userEmail);
 
-                    $arr = array (
-                                     'login'=> $_GET['email'],
-                                     'first_name'=>"Test Name",
-                                     'last_name'=> "Test Last Name",
-                                     'email'=> "test@email.com"  );
-                    $response['status_code_header'] = 'HTTP/1.1 200 OK';
-                    $response['body'] = json_encode($result);
-                    return $response;
-
+                    // $arr = array (
+                    //                  'login'=> $_GET['email'],
+                    //                  'first_name'=>"Test Name",
+                    //                  'last_name'=> "Test Last Name",
+                    //                  'email'=> "test@email.com"  );
+                    
+                    // $response['status_code_header'] = 'HTTP/1.1 200 OK';
+                    // $response['body'] = json_encode($arr);
+                    //return $response;
                 } else {
                     $response = $this->getAllUsers();
                 };
                 break;
             case 'POST':
-                $response = $this->createUserFromRequest();
+                $response = $this->createUserFromRequest($this->requestData);
                 break;
             case 'PUT':
-                $response = $this->updateUserFromRequest($this->userEmail);
+                $response = $this->updateUserFromRequest($this->requestData, $this->userEmail,);
                 break;
             case 'DELETE':
                 $response = $this->deleteUser($this->userEmail);
@@ -103,7 +114,7 @@ class UserController {
         if (! $this->validateuser($requestData)) {
             return $this->unprocessableEntityResponse();
         }
-        $this->userGateway->update($email, $requestData);
+        $this->userGateway->update($requestData);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
         return $response;

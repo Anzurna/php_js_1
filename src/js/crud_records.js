@@ -10,6 +10,7 @@ $(function() {
             firstName: $("#firstName").val(),
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
+            password: $("#inputPassword").val(),
         }
         makeRequest('/api/api.php', requestData, "POST")
         .then((responseData) => {
@@ -59,10 +60,9 @@ $(function() {
 
     $("#update_user").click(function() {
         let requestData = {
-            actionType: "crud",
             entityName: "User",
             login: $("#inputLogin").val(),
-            firstName: $("#firstName").val(),
+            firstName: $("#inputFirstName").val(),
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
         }

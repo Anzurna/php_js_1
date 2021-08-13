@@ -73,6 +73,10 @@
         <label for="inputEmail">Email</label>
         <input type="email" class="form-control" id="inputEmail" placeholder="Enter user's email">
       </div>
+      <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" id="inputPassword" placeholder="Enter user's password">
+      </div>
       <button type="submit" id="create_user" class="btn btn-primary">Create</button>
       <button type="submit" id="update_user" class="btn btn-primary">Update</button>
   </div>

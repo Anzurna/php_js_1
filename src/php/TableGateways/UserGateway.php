@@ -14,9 +14,9 @@ class UserGateway {
     {
         $statement = "
             SELECT 
-                id, firstname, lastname, firstparent_id, secondparent_id
+                id, login, firstname, lastname, email
             FROM
-                person;
+                users;
         ";
 
         try {
@@ -28,42 +28,43 @@ class UserGateway {
         }
     }
 
-    public function find($id)
+    public function find($email)
     {
         $statement = "
             SELECT 
-                id, firstname, lastname, firstparent_id, secondparent_id
+                id, login, firstname, lastname, email, pass
             FROM
-                person
-            WHERE id = ?;
+                users
+            WHERE email = ?;
         ";
 
-        try {
+        // try {
             $statement = $this->db->prepare($statement);
-            $statement->execute(array($id));
+            $statement->execute(array($email));
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
-        } catch (\PDOException $e) {
-            exit($e->getMessage());
-        }    
+        // } catch (\PDOException $e) {
+        //     exit($e->getMessage());
+        // }    
     }
 
     public function insert(Array $input)
     {
         $statement = "
-            INSERT INTO person 
-                (firstname, lastname, firstparent_id, secondparent_id)
+            INSERT INTO users
+                (login, firstname, lastname, email, pass)
             VALUES
-                (:firstname, :lastname, :firstparent_id, :secondparent_id);
+                (:login, :firstname, :lastname, :email, :pass);
         ";
 
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
-                'firstname' => $input['firstname'],
-                'lastname'  => $input['lastname'],
-                'firstparent_id' => $input['firstparent_id'] ?? null,
-                'secondparent_id' => $input['secondparent_id'] ?? null,
+                'login' => $input['login'],
+                'firstname'  => $input['firstName'],
+                'lastname' => $input['lastName'],
+                'email' => $input['email'],
+                'pass' => $input['password'],
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {
@@ -71,26 +72,27 @@ class UserGateway {
         }    
     }
 
-    public function update($id, Array $input)
+    public function update(Array $input)
     {
         $statement = "
-            UPDATE person
+            UPDATE users
             SET 
-                firstname = :firstname,
-                lastname  = :lastname,
-                firstparent_id = :firstparent_id,
-                secondparent_id = :secondparent_id
-            WHERE id = :id;
+                login = :login,
+                firstname  = :firstname,
+                lastname = :lastname ,
+                
+                pass = :pass
+            WHERE email = :email;
         ";
 
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
-                'id' => (int) $id,
-                'firstname' => $input['firstname'],
-                'lastname'  => $input['lastname'],
-                'firstparent_id' => $input['firstparent_id'] ?? null,
-                'secondparent_id' => $input['secondparent_id'] ?? null,
+                'login' => $input['login'],
+                'firstname'  => $input['firstName'],
+                'lastname' => $input['lastName'],
+                'email' => $input['email'],
+                'pass' => $input['password'],
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {
@@ -98,16 +100,16 @@ class UserGateway {
         }    
     }
 
-    public function delete($id)
+    public function delete($email)
     {
         $statement = "
-            DELETE FROM person
-            WHERE id = :id;
+            DELETE FROM users
+            WHERE email = :email;
         ";
 
         try {
             $statement = $this->db->prepare($statement);
-            $statement->execute(array('id' => $id));
+            $statement->execute(array('email' => $email));
             return $statement->rowCount();
         } catch (\PDOException $e) {
             exit($e->getMessage());

@@ -8,6 +8,7 @@
     <?php require $_SERVER['DOCUMENT_ROOT']."/includes/navigation.php" ?>
 
     <?php include $_SERVER['DOCUMENT_ROOT']."/includes/crud_users.php" ?>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/includes/crud_record.php" ?>
     <?php include $_SERVER['DOCUMENT_ROOT']."/includes/footer.php" ?>
 </body>
 </html>

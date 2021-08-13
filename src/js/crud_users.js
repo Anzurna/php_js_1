@@ -5,7 +5,6 @@ $(function() {
     const emailUrlParameterKey = "&email=";
     $("#create_user").click(function() {
         let requestData = {
-            entityName: "User",
             login: $("#inputLogin").val(),
             firstName: $("#inputFirstName").val(),
             lastName: $("#inputLastName").val(),
@@ -27,8 +26,6 @@ $(function() {
 
     $("#delete_user").click(function() {
         let requestData = {
-            actionType: "crud",
-            entityName: "User",
             email: $("#inputEmailFindDelete").val()
         }
 
@@ -47,8 +44,6 @@ $(function() {
 
     $("#find_user").click(function() {
         let requestData = {
-            actionType: "crud",
-            entityName: "User",
             email: $("#inputEmailFindDelete").val()
         }
         get(`${usersApiPath}${emailUrlParameterKey}${requestData.email}`)
@@ -87,12 +82,11 @@ $(function() {
 
     $("#update_user").click(function() {
         let requestData = {
-            entityName: "User",
             login: $("#inputLogin").val(),
             firstName: $("#inputFirstName").val(),
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
-            password: $("#inputPassword").val(),
+            password: $("#inputEmail").val(),
         }
         makeRequest(`${usersApiPath}`, requestData, "PUT")
         .then((response) => {

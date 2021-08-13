@@ -3,6 +3,7 @@
 namespace Src\Controllers;
 
 use Src\Controllers\UserController;
+use Src\Controllers\RecordController;
 use Src\System\DatabaseConnector;
 
 class RequestController 
@@ -36,9 +37,9 @@ class RequestController
                 // echo json_encode($arr);
                 $userController = new UserController($this->dbConnection, $this->requestMethod, $this->requestData);
                 $userController->processRequest();
-            //case: 'records':
-                // $recordController = new RecordController($db, $requestMethod, $requestData);
-                //$recordController.processRequest();             
+            case 'records':
+                $recordController = new RecordController($this->dbConnection, $this->requestMethod, $this->requestData);
+                $recordController->processRequest();             
         }
         // header($response['status_code_header']);
         // if ($response['body']) {

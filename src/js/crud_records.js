@@ -1,72 +1,98 @@
 import {makeRequest, get} from "/src/js/requests.js";
 
 $(function() {
-
-    $("#create_user").click(function() {
+    const recordsApiPath= "/api/api.php?ent=records";
+    const idUrlParameterKey = "&title=";
+    $("#createRecord").click(function() {
         let requestData = {
-            actionType: "crud",
-            entityName: "User",
-            login: $("#inputLogin").val(),
-            firstName: $("#firstName").val(),
-            lastName: $("#inputLastName").val(),
-            email: $("#inputEmail").val(),
-            password: $("#inputPassword").val(),
+            title: $("#recordInputTitle").val(),
+            content: $("#recordInputContent").val(),
         }
-        makeRequest('/api/api.php', requestData, "POST")
+        makeRequest(`${recordsApiPath}`, requestData, "POST")
+        .then((response) => {
+            console.log(response.status);
+            
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((responseData) => {
   
         });
     });
 
-    $("#delete_user").click(function() {
+    $("#deleteRecord").click(function() {
         let requestData = {
-            actionType: "crud",
-            entityName: "User",
-            crudAction : "delete",
-            login: $("#inputLoginFindDelete").val()
+            title: $("#recordFindDeleteTitle").val()
         }
-        makeRequest('/api/api.php', requestData, "DELETE")
+        makeRequest(`${recordsApiPath}`, requestData, "DELETE")
+        .then((response) => {
+            console.log(response.status);
+            
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((responseData) => {
 
         });
     });
 
-    $("#find_user").click(function() {
+    $("#findRecord").click(function() {
         let requestData = {
-            actionType: "crud",
-            entityName: "User",
-            login: $("#inputLoginFindDelete").val()
+            title: $("#recordFindDeleteTitle").val()
         }
-        get('/api/api.php')
+        console.log(requestData)
+        get(`${recordsApiPath}${idUrlParameterKey}${requestData.title}`)
+        .then((response) => {
+            console.log(response.status);
+            
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((responseData) => {
-            //display table with user information
+            //display table with record information
         });
     });
 
-    $("#find_update_user").click(function() {
+    $("#findUpdateRecord").click(function() {
         let requestData = {
-            actionType: "crud",
-            entityName: "User",
-            login: $("#inputLoginFindDelete").val()
+            title: $("#recordFindDeleteTitle").val()
         }
-        get('/api/api.php' + "?email=" + requestData.login)
+        console.log(requestData)
+        get(`${recordsApiPath}${idUrlParameterKey}${requestData.title}`)
+        .then((response) => {
+            console.log(response.status);
+            
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((data) => {
-            $("#inputLogin").val(data.login);
-            $("#inputFirstName").val(data.first_name);
-            $("#inputLastName").val(data.last_name);
-            $("#inputEmail").val(data.email);     
+            $("#recordInputTitle").val(data[0].title);
+            $("#recordInputContent").val(data[0].content);   
         });
     });
 
-    $("#update_user").click(function() {
+    $("#updateRecord").click(function() {
         let requestData = {
-            entityName: "User",
-            login: $("#inputLogin").val(),
-            firstName: $("#inputFirstName").val(),
-            lastName: $("#inputLastName").val(),
-            email: $("#inputEmail").val(),
+            title: $("#recordInputTitle").val(),
+            content: $("#recordInputContent").val(),
         }
-        makeRequest('/api/api.php', requestData, "PUT")
+        makeRequest(`${recordsApiPath}`, requestData, "PUT")
+        .then((response) => {
+            console.log(response.status);
+            
+            if (!response.ok) {
+                throw new Error("HTTP status " + response.status);
+            }
+            return response.json()
+        })
         .then((responseData) => {
   
         });

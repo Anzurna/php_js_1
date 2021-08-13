@@ -89,10 +89,9 @@
       </div>
       <button type="submit" id="find_user" class="btn btn-primary">Find</button>
       <button type="button" id="find_update_user" class="btn btn-primary">Find and Update</button>
-      <button type="submit" id="delete_user" class="btn btn-danger">Delete</button>
     </div> 
     
-    <div class="col-md-4">
+    <div class="col-md-4" style="height: 500px;overflow: auto">
       <table class="table">
       <thead>
         <tr>

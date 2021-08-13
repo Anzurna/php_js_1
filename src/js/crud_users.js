@@ -10,7 +10,8 @@ $(function() {
                     <td>${element.login}</td>
                     <td>${element.firstname}</td>
                     <td>${element.lastname}</td>
-                    <td>${element.email}</td>
+                    <td class="user_email">${element.email}</td>
+                    <td><button type="submit" id="delete_user" class="btn btn-danger delete_user_btn">Delete</button></td>
                  </tr>`)
             }
     }
@@ -28,9 +29,7 @@ $(function() {
         makeRequest(`${usersApiPath}`, requestData, "POST")
         .then((response) => {
             console.log(response.status);
-            if (!response.ok) {
-                throw new Error("HTTP status " + response.status);
-            }
+            $("#find_user").trigger('click')
             return response.json()
         })
         .then((responseData) => {
@@ -38,9 +37,10 @@ $(function() {
         });
     });
 
-    $("#delete_user").click(function() {
+    $(document).on('click','.delete_user_btn',function() {
+        let email = $(this).parent().parent().find('td.user_email').text();
         let requestData = {
-            email: $("#inputEmailFindDelete").val()
+            email: email
         }
 
         makeRequest(`${usersApiPath}`, requestData, "DELETE")
@@ -49,6 +49,7 @@ $(function() {
             if (!response.ok) {
                 throw new Error("HTTP status " + response.status);
             }
+            $("#find_user").trigger('click')
             return response.json()
         })
         .then((responseData) => {

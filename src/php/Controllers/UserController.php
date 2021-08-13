@@ -42,16 +42,6 @@ class UserController {
             case 'GET':
                 if ($this->userEmail) {
                     $response = $this->getUser($this->userEmail);
-
-                    // $arr = array (
-                    //                  'login'=> $_GET['email'],
-                    //                  'first_name'=>"Test Name",
-                    //                  'last_name'=> "Test Last Name",
-                    //                  'email'=> "test@email.com"  );
-                    
-                    // $response['status_code_header'] = 'HTTP/1.1 200 OK';
-                    // $response['body'] = json_encode($arr);
-                    //return $response;
                 } else {
                     $response = $this->getAllUsers();
                 };

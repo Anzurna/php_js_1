@@ -55,6 +55,19 @@ $(function() {
             return response.json()
         })
         .then((responseData) => {
+            
+            $("#userTable").empty();
+            for (const element of responseData) {
+                $("#userTable").append(`
+                <tr>
+                    <th scope="row">${element.id}</th>
+                    <td>${element.login}</td>
+                    <td>${element.firstname}</td>
+                    <td>${element.lastname}</td>
+                    <td>${element.email}</td>
+                 </tr>`)
+            }
+            
             //TODO display table with user information
         });
     });

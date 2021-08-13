@@ -37,9 +37,11 @@ class RequestController
                 // echo json_encode($arr);
                 $userController = new UserController($this->dbConnection, $this->requestMethod, $this->requestData);
                 $userController->processRequest();
+                break;
             case 'records':
                 $recordController = new RecordController($this->dbConnection, $this->requestMethod, $this->requestData);
-                $recordController->processRequest();             
+                $recordController->processRequest();  
+                break;           
         }
         // header($response['status_code_header']);
         // if ($response['body']) {

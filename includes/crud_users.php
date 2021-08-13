@@ -56,8 +56,8 @@
 <div id="crud-user" id="crud-user">
   <div class="container-fluid">
     <div  class="col-md-4">
-    <h2>Create or Update User</h2>
-    <div class="form-group">
+      <h2>Create or Update User</h2>
+      <div class="form-group">
         <label for="inputLogin">Login</label>
         <input type="text" class="form-control" id="inputLogin" placeholder="Enter user's login">
       </div>
@@ -79,9 +79,9 @@
       </div>
       <button type="submit" id="create_user" class="btn btn-primary">Create</button>
       <button type="submit" id="update_user" class="btn btn-primary">Update</button>
-  </div>
+    </div>
 
-    <div  class="col-md-4">
+    <div class="col-md-4">
       <h2>Find or Delete User</h2>
       <div class="form-group">
         <label for="inputEmailFindDelete">User login</label>
@@ -91,6 +91,24 @@
       <button type="button" id="find_update_user" class="btn btn-primary">Find and Update</button>
       <button type="submit" id="delete_user" class="btn btn-danger">Delete</button>
     </div> 
+    
+    <div class="col-md-4">
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">login</th>
+          <th scope="col">first name</th>
+          <th scope="col">last name</th>
+          <th scope="col">email</th>
+        </tr>
+      </thead>
+      <tbody id="userTable">
+
+    
+      </tbody>
+      </table>
+    </div>
   </div>
 </div>
 

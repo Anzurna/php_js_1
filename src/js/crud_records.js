@@ -55,6 +55,7 @@ $(function() {
             return response.json()
         })
         .then((responseData) => {
+            
             //display table with record information
         });
     });

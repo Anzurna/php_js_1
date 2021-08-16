@@ -32,15 +32,15 @@ class UserGateway {
     {
         $statement = "
             SELECT 
-                id, login, firstname, lastname, email, pass
+                id, login, firstname, lastname, email
             FROM
-                users
-            WHERE email = ?;
+                dev.users
+            WHERE email like ?
         ";
 
         // try {
             $statement = $this->db->prepare($statement);
-            $statement->execute(array($email));
+            $a = $statement->execute(["%$email%"]);
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
         // } catch (\PDOException $e) {
@@ -104,7 +104,7 @@ class UserGateway {
     {
         $statement = "
             DELETE FROM users
-            WHERE email = :email;
+            WHERE email = :email limit 1;
         ";
 
         try {

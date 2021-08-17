@@ -9,9 +9,9 @@ class DatabaseConnector {
     {
         $host = "localhost";
         $port = "3306";
-        $db   = "dev";
-        $user = "uroot";
-        $pass = "uroot";
+        $db   = "test_db";
+        $user = "test_user";
+        $pass = "Testing89";
 
         // try {
         $this->dbConnection = new \PDO(

@@ -6,6 +6,7 @@
 </head>
 <body>
     <?php require "includes/navigation.php" ?>
+    <?php require  $_SERVER['DOCUMENT_ROOT']."/includes/sign_in.php" ?>
 
     <?php require "includes/footer.php" ?>
 </body>

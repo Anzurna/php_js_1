@@ -6,6 +6,7 @@
 </head>
 <body>
     <?php require "includes/navigation.php" ?>
+    <?php require  "includes/sign_in_form.php" ?>
 
     <?php require "includes/footer.php" ?>
 </body>

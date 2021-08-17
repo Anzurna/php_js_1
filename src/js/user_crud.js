@@ -10,7 +10,7 @@ $(function() {
             firstName: $("#inputFirstName").val(),
             lastName: $("#inputLastName").val(),
             email: $("#inputEmail").val(),
-            password: $("#inputEmail").val(),
+            password: $("#inputPassword").val(),
         }
         makeRequest(`${usersApiPath}`, requestData, "PUT")
         .then((response) => {

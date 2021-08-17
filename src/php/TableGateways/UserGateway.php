@@ -32,7 +32,7 @@ class UserGateway {
     {
         $statement = "
             SELECT 
-                id, login, firstname, lastname, email
+                id, login, firstname, lastname, email, pass
             FROM
                 dev.users
             WHERE email like ?
